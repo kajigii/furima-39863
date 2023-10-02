@@ -28,69 +28,69 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| nickname           | string | null: false |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
-| name               | string | null: false |
-| kana_name          | string | null: false |
-| date of birth      | string | null: false |
+| Column             | Type   | Options      |
+| ------------------ | ------ | -----------  |
+| nickname           | string | null: false  |
+| email              | string | unique: true |
+| encrypted_password | string | null: false  |
+| first_name         | string | null: false  |
+| last_name          | string | null: false  |
+| first_name_kana    | string | null: false  |
+| last_name_kana     | string | null: false  |
+| date_of_birth      | date   | null: false  |
 
 ### Association
 
-- has_many :item
-- has_many :buy
+- has_many :items
+- has_many :purchases
+
 
 ## items テーブル
 
-| Column         | Type       | Options                        |
-| ------         | ------     | -----------                    |
-| item_name      | string     | null: false                    |
-| category       | string     | null: false                    |
-| condition      | string     | null: false                    |
-| burden         | string     | null: false                    |
-| region         | string     | null: false                    |
-| until shipping | string     | null: false                    |
-| price          | string     | null: false                    |
-| seller         | string     | null: false                    |
-| user           | references | null: false, foreign_key: true |
-
+| Column            | Type       | Options                        |
+| ------            | ------     | -----------                    |
+| item_name         | string     | null: false                    |
+| description       | text       | null: false                    |
+| category_id       | string     | null: false                    |
+| condition_id      | string     | null: false                    |
+| burden_id         | string     | null: false                    |
+| region_id         | string     | null: false                    |
+| until_shipping_id | string     | null: false                    |
+| price             | integer    | null: false                    |
+| user              | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_one    :buy
+- has_one    :purchase
 
-## buy テーブル
+
+## purchases テーブル
 
 | Column  | Type       | Options                        |
 | ------  | ---------- | ------------------------------ |
 | user    | references | null: false, foreign_key: true |
 | item    | references | null: false, foreign_key: true |
 
-
 ### Association
 
 - belongs_to :item
 - belongs_to :user
-- belongs_to :address
+- has_one    :address
 
-## address テーブル
+
+## addresses テーブル
 
 | Column             | Type       | Options                        |
 | -------            | ---------- | ------------------------------ |
 | post_code          | string     | null: false                    |
-| prefecture         | string     | null: false                    |
+| region_id          | string     | null: false                    |
+| city               | string     | null: false                    |
 | street_address     | string     | null: false                    |
-| building           | string     | null: false                    |
-| telephone number   | string     | null: false                    |
-| buy                | string     | null: false                    |
-| user               | references | null: false, foreign_key: true |
-| item               | references | null: false, foreign_key: true |
-
+| building           | string     |                                |
+| telephone_number   | string     | null: false                    |
+| purchase           | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_one    :buy
-- belongs_to :item
+- belongs_to    :purchase
