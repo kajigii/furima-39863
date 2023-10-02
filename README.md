@@ -28,16 +28,16 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column             | Type   | Options      |
-| ------------------ | ------ | -----------  |
-| nickname           | string | null: false  |
-| email              | string | unique: true |
-| encrypted_password | string | null: false  |
-| first_name         | string | null: false  |
-| last_name          | string | null: false  |
-| first_name_kana    | string | null: false  |
-| last_name_kana     | string | null: false  |
-| date_of_birth      | date   | null: false  |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | -----------               |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| first_name         | string | null: false               |
+| last_name          | string | null: false               |
+| first_name_kana    | string | null: false               |
+| last_name_kana     | string | null: false               |
+| date_of_birth      | date   | null: false               |
 
 ### Association
 
@@ -51,11 +51,11 @@ Things you may want to cover:
 | ------            | ------     | -----------                    |
 | item_name         | string     | null: false                    |
 | description       | text       | null: false                    |
-| category_id       | string     | null: false                    |
-| condition_id      | string     | null: false                    |
-| burden_id         | string     | null: false                    |
-| region_id         | string     | null: false                    |
-| until_shipping_id | string     | null: false                    |
+| category_id       | integer    | null: false                    |
+| condition_id      | integer    | null: false                    |
+| burden_id         | integer    | null: false                    |
+| region_id         | integer    | null: false                    |
+| until_shipping_id | integer    | null: false                    |
 | price             | integer    | null: false                    |
 | user              | references | null: false, foreign_key: true |
 
@@ -84,7 +84,7 @@ Things you may want to cover:
 | Column             | Type       | Options                        |
 | -------            | ---------- | ------------------------------ |
 | post_code          | string     | null: false                    |
-| region_id          | string     | null: false                    |
+| region_id          | integer    | null: false                    |
 | city               | string     | null: false                    |
 | street_address     | string     | null: false                    |
 | building           | string     |                                |
