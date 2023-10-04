@@ -39,11 +39,29 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include "Password can't be blank"
       end
-      it 'passwordが6文字以上で半角英数字混合である' do
-        @user.password = 'pass.match(/\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]{6,}+\z/i)'
+
+      it 'passwordが5文字以下では登録できない' do
+        @user.password = 'aa11a' 
         @user.valid?
-        expect(@user.errors.full_messages).to include "Password confirmation doesn't match Password"
+        expect(@user.errors.full_messages).to include "Password is too short (minimum is 6 characters)"
       end
+      it 'passwordが数字だけだと登録できない' do
+        @user.password = '123456' 
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Password confirmation doesn't match Password", "Password には英字と数字の両方を含めて設定してください"
+      end
+      it 'passwordが英字だけだと登録できない' do
+        @user.password = 'password'
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Password confirmation doesn't match Password", "Password には英字と数字の両方を含めて設定してください"
+      end
+      it 'passwordが全角（漢字・ひらがな・カタカナ）だと登録できない' do
+        @user.password = '漢字かなカナ' 
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Password confirmation doesn't match Password", "Password には英字と数字の両方を含めて設定してください"
+      end
+
+
       it 'passwordとpassword_confirmationが一致しないと登録できない' do
         @user = FactoryBot.build(:user, password: 'password123', password_confirmation: 'password456')
         @user.valid?
