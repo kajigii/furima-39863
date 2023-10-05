@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   belongs_to :until_shipping
 
 
-  validates :item_name, :text, presence: true
+  validates :item_name, presence: true
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :condition_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :burden_id, numericality: { other_than: 1 , message: "can't be blank"}
