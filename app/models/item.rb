@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   belongs_to :burden
   belongs_to :region
   belongs_to :until_shipping
+  belongs_to :user
 
   validates :image, presence: true
   validates :item_name, presence: true
