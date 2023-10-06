@@ -66,45 +66,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include "Until shipping can't be blank"
       end
-
-
+        
       it 'priceが空では登録できない' do
         @item.price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include "Price can't be blank"
-      end
-      it 'priceが英字だと登録できない' do
-        @item.price = 'abc'
-        @item.valid?
-        binding.pry
-        expect(@item.errors.full_messages).to include "Price is invalid. Input half-width characters"
-      end
-      
-      it 'priceが全角（漢字・ひらがな・カタカナ）だと登録できない' do
-        @item.price = '漢字かなカナ' 
-        @item.valid?
-        expect(@item.errors.full_messages).to include "Price is invalid. Input half-width characters"
-      end
-      it 'priceが300円未満だと登録できない' do
-        @item.price = 299
-        @item.valid?
-        expect(@item.errors.full_messages).to include "Price is out of setting range"
-      end
-      it 'priceが10000000円未満だと登録できない' do
-        @item.price = 10000000
-        @item.valid?
-        expect(@item.errors.full_messages).to include "Price is out of setting range"
-      end
-      it 'priceが空では登録できない' do
-        @item.price = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include "Price can't be blank"
-      end
-      
-      it 'priceが英字だと登録できない' do
-        @item.price = 'abc'
-        @item.valid?
-        expect(@item.errors.full_messages).to include "Price is invalid. Input half-width characters"
       end
       
       it 'priceが全角数字だと登録できない' do
