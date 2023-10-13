@@ -39,6 +39,7 @@ class ItemsController < ApplicationController
     redirect_to root_path
   end
 
+  
 
   private
 
@@ -48,7 +49,7 @@ class ItemsController < ApplicationController
   
   def move_to_index
     @item = Item.find(params[:id])
-    unless user_signed_in? && current_user == @item.user
+    if current_user != @item.user || @item.purchase.present?
       redirect_to root_path
     end
   end
