@@ -4,7 +4,7 @@ class PurchasesController < ApplicationController
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-    if current_user == @item.user
+    if current_user == @item.user || @item.purchase.present?
       redirect_to root_path
     else
       # 商品の購入ページを表示する処理を追加
